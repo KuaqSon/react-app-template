@@ -1,4 +1,4 @@
-import { createStyles, Title, Button, Container, Group } from '@mantine/core';
+import { Button, Container, Group, Title, createStyles } from '@mantine/core';
 
 const useStyles = createStyles((theme) => ({
   root: {
@@ -50,7 +50,6 @@ export default function Interrupts() {
           size="md"
           onClick={() => {
             window.location.href = '/';
-            return;
           }}
         >
           Take me back to home page

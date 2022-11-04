@@ -1,5 +1,5 @@
-import { Accordion, Container, createStyles, Title, Text, Group, Skeleton, Stack } from '@mantine/core';
-import { useQuery } from 'react-query';
+import { Accordion, Container, Group, Skeleton, Stack, Text, Title, createStyles } from '@mantine/core';
+import { useQuery } from '@tanstack/react-query';
 import { mockRandomQuotesApi } from 'services/api';
 
 const useStyles = createStyles((theme, _params, getRef) => {
@@ -54,7 +54,7 @@ function AccordionLabel({ anime, character }: AccordionLabelProps) {
 export default function Quotes(): JSX.Element {
   const { classes } = useStyles();
 
-  const { data: quotesResp, isLoading } = useQuery('mockRandomQuotes', () => mockRandomQuotesApi(), {
+  const { data: quotesResp, isLoading } = useQuery(['mockRandomQuotes'], () => mockRandomQuotesApi(), {
     cacheTime: Infinity,
     refetchOnWindowFocus: false,
     refetchOnReconnect: false,
@@ -75,8 +75,11 @@ export default function Quotes(): JSX.Element {
   }
 
   const items = quotes?.map((q: any) => (
-    <Accordion.Item key={q.quote} label={<AccordionLabel {...q} />}>
-      {q.quote}
+    <Accordion.Item key={q.quote} value={q.quote}>
+      <Accordion.Control>
+        <AccordionLabel {...q} />
+      </Accordion.Control>
+      <Accordion.Panel>{q.quote}</Accordion.Panel>
     </Accordion.Item>
   ));
 
@@ -87,12 +90,9 @@ export default function Quotes(): JSX.Element {
           Random Quotes
         </Title>
         <Accordion
-          initialItem={0}
-          multiple={true}
-          iconPosition="right"
+          multiple
           classNames={{
             item: classes.item,
-            itemOpened: classes.itemOpened,
             control: classes.control,
           }}
         >

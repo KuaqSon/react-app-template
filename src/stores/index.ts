@@ -1,12 +1,28 @@
-import createAppSlice from 'stores/slices/createAppSlice';
-import createAuthSlice from 'stores/slices/createAuthSlice';
-import create, { GetState, SetState } from 'zustand';
+/* eslint-disable @typescript-eslint/no-unused-vars */
 
-export type StoreSlice<T extends object> = (set: SetState<T>, get: GetState<T>) => T;
+/* eslint-disable no-param-reassign */
 
-const createRootSlice = (set: SetState<any>, get: GetState<any>) => ({
-  ...createAppSlice(set, get),
-  ...createAuthSlice(set, get),
+/* eslint-disable no-unused-vars */
+import produce from 'immer';
+import { IUser } from 'interfaces/auth';
+import create from 'zustand';
+
+export type AppStoreType = {
+  isLoggedIn: boolean;
+  currentUser: IUser;
+  authorize: (user: IUser) => void;
+};
+
+export const store = (set: Function, get: Function) => ({
+  isLoggedIn: false,
+  currentUser: {} as IUser,
+  authorize: (user: IUser) =>
+    set(
+      produce((state: AppStoreType) => {
+        state.isLoggedIn = true;
+        state.currentUser = user;
+      })
+    ),
 });
 
-export const useStore = create(createRootSlice);
+export const useAppStore = create<AppStoreType>(store);

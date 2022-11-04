@@ -1,15 +1,14 @@
+import { MantineProvider } from '@mantine/core';
+import { NotificationsProvider } from '@mantine/notifications';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import ErrorBoundary from 'components/ErrorBoundary';
 import { PrivateLayout, PublicLayout } from 'components/Layout';
 import { SuspendLoading } from 'components/Loading';
-
+import Interrupts from 'pages/Interrupts';
 import Login from 'pages/Login';
 import NotFound from 'pages/NotFound';
 import React from 'react';
-import { QueryClient, QueryClientProvider } from 'react-query';
 import { Route, Routes } from 'react-router-dom';
-import { MantineProvider } from '@mantine/core';
-import { NotificationsProvider } from '@mantine/notifications';
-import ErrorBoundary from 'components/ErrorBoundary';
-import Interrupts from 'pages/Interrupts';
 
 // Lazy load pages
 const Home = React.lazy(() => import('pages/Home'));

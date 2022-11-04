@@ -1,23 +1,23 @@
-import { showNotification } from '@mantine/notifications';
-import { Alert } from '@mantine/core';
-import * as AuthService from 'services/auth-service';
 import {
-  TextInput,
-  PasswordInput,
-  Checkbox,
+  Alert,
   Anchor,
-  Paper,
-  Title,
-  Text,
+  Button,
+  Checkbox,
   Container,
   Group,
-  Button,
+  Paper,
+  PasswordInput,
+  Text,
+  TextInput,
+  Title,
 } from '@mantine/core';
 import { useForm } from '@mantine/form';
-import { useMutation } from 'react-query';
-import { mockLoginApi } from 'services/api';
+import { showNotification } from '@mantine/notifications';
+import { useMutation } from '@tanstack/react-query';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { mockLoginApi } from 'services/api';
+import * as AuthService from 'services/auth-service';
 
 export default function Login(): JSX.Element {
   const [invalidPassword, setInvalidPassword] = useState<boolean>(false);
@@ -42,7 +42,7 @@ export default function Login(): JSX.Element {
     onSuccess: async ({ status, data }) => {
       if (status === 200) {
         AuthService.saveToken(data.token);
-        navigate(`/`);
+        navigate('/');
       } else {
         setInvalidPassword(true);
       }

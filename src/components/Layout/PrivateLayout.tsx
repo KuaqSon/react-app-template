@@ -1,26 +1,28 @@
 import { Box, Center, Container, Loader } from '@mantine/core';
+import { useQuery } from '@tanstack/react-query';
 import Footer from 'components/Footer';
 import { SuspendLoading } from 'components/Loading';
 import NavBar from 'components/NavBar';
 import UserInfo from 'components/UserInfo';
 import React from 'react';
-import { useQuery } from 'react-query';
 import { Navigate, Outlet } from 'react-router-dom';
 import { mockCurrentUserApi } from 'services/api';
-import { useStore } from 'stores';
+import { useAppStore } from 'stores';
 
 export default function PrivateLayout(): JSX.Element {
-  const gState = useStore((state) => state);
+  const gState = useAppStore((state) => state);
   console.log('🚀 ~ file: PrivateLayout.tsx ~ line 11 ~ PrivateLayout ~ gState', gState);
-  const authorize = useStore((state) => state.authorize);
-  const isLoggedIn = useStore((state) => state.isLoggedIn);
-  const user = useStore((state) => state.user);
-  const { isLoading } = useQuery('userDetail', () => mockCurrentUserApi(), {
+
+  const authorize = useAppStore((state) => state.authorize);
+  const isLoggedIn = useAppStore((state) => state.isLoggedIn);
+  const currentUser = useAppStore((state) => state.currentUser);
+
+  const { isLoading } = useQuery(['userDetail'], () => mockCurrentUserApi(), {
     cacheTime: 0,
     refetchOnWindowFocus: false,
     refetchOnReconnect: false,
     onSuccess: ({ data, status }) => {
-      if (status === 200) {
+      if (status === 200 && data.user) {
         authorize(data.user);
       }
     },
@@ -45,7 +47,7 @@ export default function PrivateLayout(): JSX.Element {
         }}
       >
         <Container sx={{ minHeight: '100vh' }}>
-          <UserInfo user={user} />
+          <UserInfo user={currentUser} />
           <NavBar />
           <React.Suspense
             fallback={

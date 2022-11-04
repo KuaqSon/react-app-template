@@ -1,5 +1,5 @@
 import { Avatar, Paper, Text } from '@mantine/core';
-import { IUser } from 'stores/types';
+import { IUser } from 'interfaces/auth';
 
 export interface UserInfoProps {
   user: IUser;

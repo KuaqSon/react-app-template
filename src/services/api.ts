@@ -1,16 +1,19 @@
 import { AxiosResponse } from 'axios';
 import qs from 'qs';
+import * as AuthService from 'services/auth-service';
 import { sleep } from 'utils/helper';
 import request from 'utils/requests';
-import * as AuthService from 'services/auth-service';
 
 const makeRequest = async (reqFunc: Function, errorFunc?: Function): Promise<AxiosResponse> => {
   try {
-    return await reqFunc();
+    return reqFunc();
   } catch (error) {
     if (errorFunc) errorFunc();
 
-    if (process.env.NODE_ENV === 'development') console.error(error);
+    if (process.env.NODE_ENV === 'development') {
+      // eslint-disable-next-line no-console
+      console.error(error);
+    }
 
     return Promise.resolve({ status: 500, statusText: 'something went wrong please try again!' } as AxiosResponse);
   }
@@ -48,28 +51,21 @@ export const mockCurrentUserApi = async (): Promise<AxiosResponse> => {
   } as AxiosResponse;
 };
 
-export const mockRandomQuotesApi = async (): Promise<AxiosResponse> => {
-  return await makeRequest(() => request.get(`https://animechan.vercel.app/api/quotes`));
-};
+export const mockRandomQuotesApi = async (): Promise<AxiosResponse> =>
+  makeRequest(() => request.get('https://animechan.vercel.app/api/quotes'));
 
-export const mockFootballStandingsApi = async (): Promise<AxiosResponse> => {
-  return await makeRequest(() =>
-    request.get(`https://api-football-standings.azharimm.site/leagues/eng.1/standings?season=2021&sort=asc`)
+export const mockFootballStandingsApi = async (): Promise<AxiosResponse> =>
+  makeRequest(() =>
+    request.get('https://api-football-standings.azharimm.site/leagues/eng.1/standings?season=2021&sort=asc')
   );
-};
 
-export const loginApi = async (params: any): Promise<AxiosResponse> => {
-  return await makeRequest(() => request.post('/api/auth/login', params));
-};
+export const loginApi = async (params: any): Promise<AxiosResponse> =>
+  makeRequest(() => request.post('/api/auth/login', params));
 
-export const registerApi = async (params: any): Promise<AxiosResponse> => {
-  return await makeRequest(() => request.post('/api/auth/register', params));
-};
+export const registerApi = async (params: any): Promise<AxiosResponse> =>
+  makeRequest(() => request.post('/api/auth/register', params));
 
-export const getCurrentUserApi = async (): Promise<AxiosResponse> => {
-  return await makeRequest(() => request.get('/api/auth/me'));
-};
+export const getCurrentUserApi = async (): Promise<AxiosResponse> => makeRequest(() => request.get('/api/auth/me'));
 
-export const getSampleDataApi = async (params: any): Promise<AxiosResponse> => {
-  return await makeRequest(() => request.get(`/api/sample?${qs.stringify({ ...params })}`));
-};
+export const getSampleDataApi = async (params: any): Promise<AxiosResponse> =>
+  makeRequest(() => request.get(`/api/sample?${qs.stringify({ ...params })}`));

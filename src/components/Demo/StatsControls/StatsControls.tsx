@@ -1,11 +1,9 @@
-import React, { useState } from 'react';
+import { Group, Paper, Text, UnstyledButton, createStyles } from '@mantine/core';
 import dayjs from 'dayjs';
-import { createStyles, UnstyledButton, Text, Paper, Group } from '@mantine/core';
-
-import { FaSwimmer, FaRunning } from 'react-icons/fa';
-import { MdDirectionsBike } from 'react-icons/md';
-
+import React, { useState } from 'react';
 import { BsChevronDown, BsChevronUp } from 'react-icons/bs';
+import { FaRunning, FaSwimmer } from 'react-icons/fa';
+import { MdDirectionsBike } from 'react-icons/md';
 
 const useStyles = createStyles((theme) => ({
   root: {

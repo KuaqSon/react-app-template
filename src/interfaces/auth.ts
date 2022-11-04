@@ -11,14 +11,3 @@ export interface IUser {
   title: string;
   address: string;
 }
-
-export interface IAuthState {
-  authorize: Function;
-  isLoggedIn: boolean;
-  user: IUser | null;
-}
-
-export interface IAppState {
-  isSideBarOpen: boolean;
-  isFlyBarOpen: boolean;
-}

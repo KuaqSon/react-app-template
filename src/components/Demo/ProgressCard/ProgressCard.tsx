@@ -1,5 +1,5 @@
+import { Badge, Group, Paper, Progress, Text, ThemeIcon, createStyles } from '@mantine/core';
 import React from 'react';
-import { createStyles, ThemeIcon, Progress, Text, Group, Badge, Paper } from '@mantine/core';
 import { FaSwimmer } from 'react-icons/fa';
 
 const ICON_SIZE = 60;

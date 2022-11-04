@@ -1,9 +1,9 @@
-import { Container, Title, Text, Group, Skeleton, Stack, Table, Avatar, Badge } from '@mantine/core';
-import { useQuery } from 'react-query';
+import { Avatar, Badge, Container, Group, Skeleton, Stack, Table, Text, Title } from '@mantine/core';
+import { useQuery } from '@tanstack/react-query';
 import { mockFootballStandingsApi } from 'services/api';
 
 export default function Football(): JSX.Element {
-  const { data: footballResp, isLoading } = useQuery('mockFootballStandings', () => mockFootballStandingsApi(), {
+  const { data: footballResp, isLoading } = useQuery(['mockFootballStandings'], () => mockFootballStandingsApi(), {
     cacheTime: Infinity,
     refetchOnWindowFocus: false,
     refetchOnReconnect: false,

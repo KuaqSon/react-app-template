@@ -1,5 +1,5 @@
 export enum StorageKey {
-  TOKEN = `zustine_app_token`,
+  TOKEN = 'zustine_app_token',
   REFRESH_TOKEN = 'zustine_app_refresh_token',
 }
 
@@ -20,9 +20,7 @@ export const cleanAuthStorage = () => {
   removeRefreshToken();
 };
 
-export const isLoggedIn = () => {
-  return !!localStorage.getItem(StorageKey.TOKEN);
-};
+export const isLoggedIn = () => !!localStorage.getItem(StorageKey.TOKEN);
 
 export const logOut = () => {
   removeToken();
