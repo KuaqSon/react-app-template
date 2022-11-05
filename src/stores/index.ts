@@ -8,18 +8,18 @@ import { IUser } from 'interfaces/auth';
 import create from 'zustand';
 
 export type AppStoreType = {
-  isLoggedIn: boolean;
+  isAuthenticated: boolean;
   currentUser: IUser;
   authorize: (user: IUser) => void;
 };
 
 export const store = (set: Function, get: Function) => ({
-  isLoggedIn: false,
+  isAuthenticated: false,
   currentUser: {} as IUser,
   authorize: (user: IUser) =>
     set(
       produce((state: AppStoreType) => {
-        state.isLoggedIn = true;
+        state.isAuthenticated = true;
         state.currentUser = user;
       })
     ),

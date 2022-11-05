@@ -1,7 +1,9 @@
-export enum StorageKey {
-  TOKEN = 'zustine_app_token',
-  REFRESH_TOKEN = 'zustine_app_refresh_token',
-}
+import { APP_NAME } from 'utils/constants';
+
+export const StorageKey = {
+  TOKEN: `${APP_NAME}_app_token`,
+  REFRESH_TOKEN: `${APP_NAME}_app_refresh_token`,
+};
 
 export const saveToken = (token: string) => localStorage.setItem(StorageKey.TOKEN, token);
 
@@ -20,7 +22,7 @@ export const cleanAuthStorage = () => {
   removeRefreshToken();
 };
 
-export const isLoggedIn = () => !!localStorage.getItem(StorageKey.TOKEN);
+export const isAuthenticated = () => !!localStorage.getItem(StorageKey.TOKEN);
 
 export const logOut = () => {
   removeToken();

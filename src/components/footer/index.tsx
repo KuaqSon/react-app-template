@@ -1,6 +1,6 @@
 import { Box, Container } from '@mantine/core';
 
-export function Footer() {
+export default function Footer() {
   return (
     <Box sx={{ padding: '12px 16px 24px 16px' }}>
       <Container sx={{ textAlign: 'center' }}>

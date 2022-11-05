@@ -1,3 +1,3 @@
-import ProgressCard from 'components/Demo/ProgressCard/ProgressCard';
+import ProgressCard from 'components/demo/ProgressCard/ProgressCard';
 
 export default ProgressCard;

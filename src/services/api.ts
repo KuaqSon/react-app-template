@@ -30,8 +30,9 @@ export const mockLoginApi = async (params: any): Promise<AxiosResponse> => {
 };
 
 export const mockCurrentUserApi = async (): Promise<AxiosResponse> => {
-  const isLoggedIn = AuthService.isLoggedIn();
-  if (!isLoggedIn) {
+  console.log('🚀 ~ mockCurrentUserApi');
+  const isAuthenticated = AuthService.isAuthenticated();
+  if (!isAuthenticated) {
     return { status: 400 } as AxiosResponse;
   }
 

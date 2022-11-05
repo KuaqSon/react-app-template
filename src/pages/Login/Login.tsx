@@ -14,8 +14,8 @@ import {
 import { useForm } from '@mantine/form';
 import { showNotification } from '@mantine/notifications';
 import { useMutation } from '@tanstack/react-query';
+import { useRedirectFromUrl } from 'hooks/use-redirect-from-url';
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 import { mockLoginApi } from 'services/api';
 import * as AuthService from 'services/auth-service';
 
@@ -33,7 +33,7 @@ export default function Login(): JSX.Element {
     },
   });
 
-  const navigate = useNavigate();
+  const redirect = useRedirectFromUrl();
 
   const { mutate, isLoading } = useMutation(mockLoginApi, {
     onMutate: () => {
@@ -42,7 +42,7 @@ export default function Login(): JSX.Element {
     onSuccess: async ({ status, data }) => {
       if (status === 200) {
         AuthService.saveToken(data.token);
-        navigate('/');
+        redirect();
       } else {
         setInvalidPassword(true);
       }

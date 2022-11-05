@@ -1,6 +1,6 @@
 import { Container, Stack } from '@mantine/core';
-import ProgressCard from 'components/Demo/ProgressCard';
-import StatsControls from 'components/Demo/StatsControls';
+import ProgressCard from 'components/demo/ProgressCard';
+import StatsControls from 'components/demo/StatsControls';
 
 export default function Home(): JSX.Element {
   return (
