@@ -1,6 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
-import { SuspendLoading } from 'components/Loading';
 import ErrorBoundary from 'components/error-boundary';
+import SuspendLoading from 'components/suspend-loading';
 import { ReactNode } from 'react';
 import { mockCurrentUserApi } from 'services/api';
 import { useAppStore } from 'stores';

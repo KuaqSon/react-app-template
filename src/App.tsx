@@ -1,8 +1,8 @@
 import { MantineProvider } from '@mantine/core';
 import { NotificationsProvider } from '@mantine/notifications';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { SuspendLoading } from 'components/Loading';
 import ErrorBoundary from 'components/error-boundary';
+import SuspendLoading from 'components/suspend-loading';
 import AuthProvider from 'providers/auth-provider';
 import React from 'react';
 import AppRouter from 'router';
