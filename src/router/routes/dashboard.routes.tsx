@@ -1,10 +1,10 @@
-import PagePlaceholder from 'components/demo/page2-placeholder';
+import PlaceholderBlock from 'components/demo2/placeholder-block';
 import NotFound from 'pages/NotFound';
 import { Route, Routes } from 'react-router-dom';
 
 const DashboardRoutes = () => (
   <Routes>
-    <Route path="/" element={<PagePlaceholder title="Dashboard" />} />
+    <Route path="/" element={<PlaceholderBlock title="Dashboard" />} />
     <Route path="*" element={<NotFound />} />
   </Routes>
 );

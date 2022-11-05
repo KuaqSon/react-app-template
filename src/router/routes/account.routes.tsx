@@ -1,4 +1,4 @@
-import PagePlaceholder from 'components/demo/page2-placeholder';
+import PlaceholderBlock from 'components/demo2/placeholder-block';
 import NotFound from 'pages/NotFound';
 import { Navigate, Route, Routes } from 'react-router-dom';
 import { AuthenticatedGuard } from 'router/authenticated.guard';
@@ -6,7 +6,7 @@ import { AuthenticatedGuard } from 'router/authenticated.guard';
 const AccountRoutes = () => (
   <Routes>
     <Route path="/" element={<AuthenticatedGuard element={<Navigate to="profile" replace />} />} />
-    <Route path="profile" element={<AuthenticatedGuard element={<PagePlaceholder />} />} />
+    <Route path="profile" element={<AuthenticatedGuard element={<PlaceholderBlock />} />} />
 
     {/* <Route path="activate" element={<PageActivate />} />
     <Route path="reset" element={<PageResetPasswordRequest />} />
