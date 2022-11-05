@@ -1,4 +1,4 @@
-import PagePlaceholder from 'components/demo/page-placeholder';
+import PagePlaceholder from 'components/demo/page2-placeholder';
 import NotFound from 'pages/NotFound';
 import { Route, Routes } from 'react-router-dom';
 
