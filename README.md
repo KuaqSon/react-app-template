@@ -1,4 +1,20 @@
-# ReactJS template with Mantine UI and Zustand
+# Dashboard app starter template
+
+## Built With
+This section should list any major frameworks/libraries used to bootstrap your project. Leave any add-ons/plugins for the acknowledgements section.
+
+- [ReactJS](https://reactjs.org/)
+- [Mantine UI](https://mantine.dev/)
+- [React Query](https://tanstack.com/query/v4/docs/overview)
+- [Zustand](https://github.com/pmndrs/zustand)
+
+## What included?
+
+- Authentication context and sign-in flow
+- Routes protected by authorization and authority
+- Basic dashboard layout
+- Split codes and lazy load according to pages
+- API calling with authorization tokens
 
 ## Available Scripts
 
