@@ -35,7 +35,7 @@ const useStyles = createStyles((theme) => ({
     flex: 1,
     backgroundColor: theme.colors.gray[1],
     margin: 0,
-    padding: theme.spacing.sm,
+    padding: '12px 0',
   },
 }));
 
@@ -67,19 +67,19 @@ export default function AppLayout(): JSX.Element {
           </Group>
         </Group>
       </Navbar.Section>
-
-      <Navbar.Section grow component={ScrollArea}>
-        <SideBarContent routes={defaultRoutes} />
-      </Navbar.Section>
-
       <Navbar.Section>
         <Link to="/account/profile" className="link">
           <UserButton image={currentUser.photo} name={currentUser.name} email={currentUser.email} />
         </Link>
+      </Navbar.Section>
+      <Navbar.Section grow component={ScrollArea}>
+        <SideBarContent routes={defaultRoutes} />
+      </Navbar.Section>
+      <Box>
         <Text fz="xs" ta="center">
           Made by Son Nguyen with ❤️
         </Text>
-      </Navbar.Section>
+      </Box>
     </Navbar>
   );
 
