@@ -10,6 +10,7 @@ import {
   Loader,
   Navbar,
   ScrollArea,
+  Text,
   ThemeIcon,
   createStyles,
 } from '@mantine/core';
@@ -50,7 +51,7 @@ export default function AppLayout(): JSX.Element {
   }, [location.pathname]);
 
   const renderNavbarNested = () => (
-    <Navbar height="100vh" width={{ sm: 300 }} className={classes.navbar}>
+    <Navbar height="100vh" width={{ sm: 260 }} className={classes.navbar}>
       <Navbar.Section p="sm">
         <Group position="apart">
           <MainLogo />
@@ -75,6 +76,9 @@ export default function AppLayout(): JSX.Element {
         <Link to="/account/profile" className="link">
           <UserButton image={currentUser.photo} name={currentUser.name} email={currentUser.email} />
         </Link>
+        <Text fz="xs" ta="center">
+          Made by Son Nguyen with ❤️
+        </Text>
       </Navbar.Section>
     </Navbar>
   );

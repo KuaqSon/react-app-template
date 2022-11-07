@@ -1,3 +1,4 @@
+import { Container, Title } from '@mantine/core';
 import UserInfo from 'components/shared/user-info';
 import { useAppStore } from 'stores';
 
@@ -6,7 +7,10 @@ export default function PageUserProfile(): JSX.Element {
 
   return (
     <>
-      <UserInfo user={currentUser} />
+      <Container size="lg">
+        <Title my="xl">Account Profile</Title>
+        <UserInfo user={currentUser} />
+      </Container>
     </>
   );
 }

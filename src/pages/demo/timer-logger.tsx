@@ -1,4 +1,4 @@
-import { Container, Paper, Stack, Title } from '@mantine/core';
+import { Container, Paper, Title } from '@mantine/core';
 import { TableSort } from 'components/demo/TableSort';
 
 export default function PageTimerLoggerDemo(): JSX.Element {

@@ -1,4 +1,4 @@
-import { Box, Container, Group, Paper, Progress, SimpleGrid, Text, Title, createStyles, Stack } from '@mantine/core';
+import { Box, Container, Group, Paper, Progress, SimpleGrid, Stack, Text, Title, createStyles } from '@mantine/core';
 import { IconArrowUpRight, IconDeviceAnalytics } from '@tabler/icons';
 
 const mockData = {
@@ -90,7 +90,7 @@ export function StatsSegments({ total, diff, data }: StatsSegmentsProps) {
   ));
 
   return (
-    <Paper withBorder p="md" radius="md">
+    <Paper p="md" radius="md" shadow="xs">
       <Group position="apart">
         <Group align="flex-end" spacing="xs">
           <Text size="xl" weight={700}>
@@ -122,7 +122,7 @@ export default function PagePerformanceDashboardDemo(): JSX.Element {
       <Container size="lg">
         <Title my="xl">Performance Dashboard</Title>
 
-        <Stack>
+        <Stack my="xl">
           <StatsSegments {...mockData} />
           <StatsSegments {...mockData} />
           <StatsSegments {...mockData} />
