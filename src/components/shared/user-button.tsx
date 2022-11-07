@@ -27,7 +27,7 @@ export function UserButton({ image, name, email, icon, ...others }: UserButtonPr
   return (
     <UnstyledButton className={classes.user} {...others}>
       <Group>
-        <Avatar src={image} radius="xl" />
+        <Avatar src={image} radius="xl" color="blue" />
 
         <div style={{ flex: 1 }}>
           <Text size="sm" weight={500}>

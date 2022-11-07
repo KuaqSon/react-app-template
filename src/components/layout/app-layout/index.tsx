@@ -1,56 +1,28 @@
-import { Box, Center, Code, Flex, Group, Loader, Navbar, ScrollArea, createStyles } from '@mantine/core';
 import {
-  IconAdjustments,
-  IconCalendarStats,
-  IconFileAnalytics,
-  IconGauge,
-  IconLock,
-  IconNotes,
-  IconPresentationAnalytics,
-} from '@tabler/icons';
+  ActionIcon,
+  Box,
+  Center,
+  Code,
+  Drawer,
+  Flex,
+  Group,
+  Header,
+  Loader,
+  Navbar,
+  ScrollArea,
+  ThemeIcon,
+  createStyles,
+} from '@mantine/core';
+import { IconAdjustmentsHorizontal, IconX } from '@tabler/icons';
+import { defaultRoutes } from 'components/layout/app-layout/routes-config';
 import MainLogo from 'components/logo/main-logo';
-import { LinksGroup } from 'components/shared/links-group';
+import SideBarContent from 'components/shared/side-bar-content';
 import { UserButton } from 'components/shared/user-button';
 import { useMobileBreak } from 'hooks/use-screen-break';
-import React from 'react';
-import { Link, Outlet } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import { Link, Outlet, useLocation } from 'react-router-dom';
+import { useAppStore } from 'stores';
 import { APP_VERSION } from 'utils/constants';
-
-const mockdata = [
-  { label: 'Dashboard', icon: IconGauge },
-  {
-    label: 'Market news',
-    icon: IconNotes,
-    initiallyOpened: true,
-    links: [
-      { label: 'Overview', link: '/' },
-      { label: 'Forecasts', link: '/' },
-      { label: 'Outlook', link: '/' },
-      { label: 'Real time', link: '/' },
-    ],
-  },
-  {
-    label: 'Releases',
-    icon: IconCalendarStats,
-    links: [
-      { label: 'Upcoming releases', link: '/' },
-      { label: 'Previous releases', link: '/' },
-      { label: 'Releases schedule', link: '/' },
-    ],
-  },
-  { label: 'Analytics', icon: IconPresentationAnalytics },
-  { label: 'Contracts', icon: IconFileAnalytics },
-  { label: 'Settings', icon: IconAdjustments },
-  {
-    label: 'Security',
-    icon: IconLock,
-    links: [
-      { label: 'Enable 2FA', link: '/' },
-      { label: 'Change password', link: '/' },
-      { label: 'Recovery codes', link: '/' },
-    ],
-  },
-];
 
 const useStyles = createStyles((theme) => ({
   navbar: {
@@ -58,69 +30,97 @@ const useStyles = createStyles((theme) => ({
     borderRight: 'none',
   },
 
-  header: {
-    padding: theme.spacing.md,
-    color: theme.black,
+  appInner: {
+    flex: 1,
+    backgroundColor: theme.colors.gray[1],
+    margin: 0,
+    padding: theme.spacing.sm,
   },
-
-  links: {},
-
-  linksInner: {
-    paddingTop: theme.spacing.xl,
-    paddingBottom: theme.spacing.xl,
-  },
-
-  footer: {},
 }));
 
-export function NavbarNested() {
+export default function AppLayout(): JSX.Element {
+  const isMobile = useMobileBreak();
   const { classes } = useStyles();
-  const links = mockdata.map((item) => <LinksGroup {...item} key={item.label} />);
+  const [opened, setOpened] = useState(false);
+  const location = useLocation();
+  const currentUser = useAppStore((state) => state.currentUser);
 
-  return (
+  useEffect(() => {
+    setOpened(false);
+  }, [location.pathname]);
+
+  const renderNavbarNested = () => (
     <Navbar height="100vh" width={{ sm: 300 }} className={classes.navbar}>
-      <Navbar.Section className={classes.header}>
+      <Navbar.Section p="sm">
         <Group position="apart">
           <MainLogo />
-          <Code sx={{ fontWeight: 700 }}>{APP_VERSION}</Code>
+          <Group>
+            <Code sx={{ fontWeight: 700 }}>{APP_VERSION}</Code>
+            {isMobile && (
+              <ActionIcon onClick={() => setOpened(false)}>
+                <ThemeIcon color="dark" variant="outline" size="lg">
+                  <IconX />
+                </ThemeIcon>
+              </ActionIcon>
+            )}
+          </Group>
         </Group>
       </Navbar.Section>
 
-      <Navbar.Section grow className={classes.links} component={ScrollArea}>
-        <div className={classes.linksInner}>{links}</div>
+      <Navbar.Section grow component={ScrollArea}>
+        <SideBarContent routes={defaultRoutes} />
       </Navbar.Section>
 
-      <Navbar.Section className={classes.footer}>
+      <Navbar.Section>
         <Link to="/account/profile" className="link">
-          <UserButton
-            // eslint-disable-next-line max-len
-            image="https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=255&q=80"
-            name="Ann Nullpointer"
-            email="anullpointer@yahoo.com"
-          />
+          <UserButton image={currentUser.photo} name={currentUser.name} email={currentUser.email} />
         </Link>
       </Navbar.Section>
     </Navbar>
   );
-}
 
-export default function AppLayout(): JSX.Element {
-  const isMobile = useMobileBreak();
+  const renderMobileHeader = () => {
+    if (!isMobile) {
+      return null;
+    }
+
+    return (
+      <>
+        <Drawer position="right" opened={opened} onClose={() => setOpened(false)} size="xl" withCloseButton={false}>
+          {renderNavbarNested()}
+        </Drawer>
+        <Header height={60}>
+          <Flex align="center" justify="space-between" h="100%" px="sm">
+            <MainLogo />
+            <ActionIcon onClick={() => setOpened(true)}>
+              <ThemeIcon color="dark" variant="outline" size="lg">
+                <IconAdjustmentsHorizontal />
+              </ThemeIcon>
+            </ActionIcon>
+          </Flex>
+        </Header>
+      </>
+    );
+  };
 
   return (
-    <Flex gap="md">
-      <NavbarNested />
-      <Box>
-        <React.Suspense
-          fallback={
-            <Center sx={{ padding: 32 }}>
-              <Loader />
-            </Center>
-          }
-        >
-          <Outlet />
-        </React.Suspense>
-      </Box>
-    </Flex>
+    <Box bg="white">
+      {renderMobileHeader()}
+      <Flex sx={{ height: '100vh' }}>
+        {!isMobile && renderNavbarNested()}
+
+        <Box className={classes.appInner} component={ScrollArea}>
+          <React.Suspense
+            fallback={
+              <Center sx={{ padding: 32, height: '60vh' }}>
+                <Loader />
+              </Center>
+            }
+          >
+            <Outlet />
+          </React.Suspense>
+        </Box>
+      </Flex>
+    </Box>
   );
 }

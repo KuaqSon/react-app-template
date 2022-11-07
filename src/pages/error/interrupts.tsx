@@ -1,6 +1,4 @@
-import { Button, Container, Group, Text, Title, createStyles } from '@mantine/core';
-import React from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Button, Container, Group, Title, createStyles } from '@mantine/core';
 
 const useStyles = createStyles((theme) => ({
   root: {
@@ -14,7 +12,7 @@ const useStyles = createStyles((theme) => ({
     fontSize: 220,
     lineHeight: 1,
     marginBottom: theme.spacing.xl * 1.5,
-    color: theme.colorScheme === 'dark' ? theme.colors.dark[4] : theme.colors.gray[2],
+    color: theme.black,
 
     [theme.fn.smallerThan('sm')]: {
       fontSize: 120,
@@ -40,24 +38,23 @@ const useStyles = createStyles((theme) => ({
   },
 }));
 
-const NotFound: React.FC = () => {
+export default function Interrupts() {
   const { classes } = useStyles();
-  const navigate = useNavigate();
   return (
     <Container className={classes.root}>
-      <div className={classes.label}>404</div>
-      <Title className={classes.title}>You have found a secret place.</Title>
-      <Text color="dimmed" size="lg" align="center" className={classes.description}>
-        Unfortunately, this is only a 404 page. You may have mistyped the address, or the page has been moved to another
-        URL.
-      </Text>
+      <div className={classes.label}>Oops!</div>
+      <Title className={classes.title}>Something went wrong.</Title>
       <Group position="center">
-        <Button variant="subtle" size="md" onClick={() => navigate('/', { replace: true })}>
+        <Button
+          variant="subtle"
+          size="md"
+          onClick={() => {
+            window.location.href = '/';
+          }}
+        >
           Take me back to home page
         </Button>
       </Group>
     </Container>
   );
-};
-
-export default NotFound;
+}

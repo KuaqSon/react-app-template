@@ -1,19 +1,13 @@
-import PlaceholderBlock from 'components/demo/placeholder-block';
-import NotFound from 'pages/NotFound';
+import React from 'react';
 import { Navigate, Route, Routes } from 'react-router-dom';
-import { AuthenticatedGuard } from 'router/authenticated.guard';
+
+const PageUserProfile = React.lazy(() => import('pages/user-profile'));
+const NotFound = React.lazy(() => import('pages/not-found'));
 
 const AccountRoutes = () => (
   <Routes>
-    <Route path="/" element={<AuthenticatedGuard element={<Navigate to="profile" replace />} />} />
-    <Route path="profile" element={<AuthenticatedGuard element={<PlaceholderBlock />} />} />
-
-    {/* <Route path="activate" element={<PageActivate />} />
-    <Route path="reset" element={<PageResetPasswordRequest />} />
-    <Route path="reset/finish" element={<PageResetPasswordConfirm />} />
-
-    <Route path="profile" element={<AuthenticatedGuard element={<PageProfile />} />} />
-    <Route path="password" element={<AuthenticatedGuard element={<PagePassword />} />} /> */}
+    <Route path="/" element={<Navigate to="profile" replace />} />
+    <Route path="profile" element={<PageUserProfile />} />
 
     <Route path="*" element={<NotFound />} />
   </Routes>

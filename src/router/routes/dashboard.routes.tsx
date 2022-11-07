@@ -1,10 +1,14 @@
-import PlaceholderBlock from 'components/demo/placeholder-block';
-import NotFound from 'pages/NotFound';
+import NotFound from 'pages/not-found';
+import React from 'react';
 import { Route, Routes } from 'react-router-dom';
+
+const PageDashboardDemo = React.lazy(() => import('pages/demo/dashboard'));
+const PagePerformanceDashboardDemo = React.lazy(() => import('pages/demo/dashboard-performance'));
 
 const DashboardRoutes = () => (
   <Routes>
-    <Route path="/" element={<PlaceholderBlock title="Dashboard" />} />
+    <Route path="/" element={<PageDashboardDemo />} />
+    <Route path="/performance" element={<PagePerformanceDashboardDemo />} />
     <Route path="*" element={<NotFound />} />
   </Routes>
 );

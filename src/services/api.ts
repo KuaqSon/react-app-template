@@ -30,7 +30,6 @@ export const mockLoginApi = async (params: any): Promise<AxiosResponse> => {
 };
 
 export const mockCurrentUserApi = async (): Promise<AxiosResponse> => {
-  console.log('🚀 ~ mockCurrentUserApi');
   const isAuthenticated = AuthService.isAuthenticated();
   if (!isAuthenticated) {
     return { status: 400 } as AxiosResponse;
@@ -46,6 +45,7 @@ export const mockCurrentUserApi = async (): Promise<AxiosResponse> => {
         title: 'Mr',
         birthday: '1994-10-25T19:08:24.122Z',
         address: 'Mallow, Clare, Ireland',
+        email: 'demo@demo.com',
       },
     },
     status: 200,

@@ -19,7 +19,7 @@ import { useState } from 'react';
 import { mockLoginApi } from 'services/api';
 import * as AuthService from 'services/auth-service';
 
-export default function Login(): JSX.Element {
+export default function PageLogin(): JSX.Element {
   const [invalidPassword, setInvalidPassword] = useState<boolean>(false);
   const form = useForm({
     initialValues: {
