@@ -1,10 +1,10 @@
-import axios, { AxiosRequestConfig, AxiosResponse } from 'axios';
+import axios, { AxiosRequestConfig, AxiosRequestHeaders, AxiosResponse, InternalAxiosRequestConfig } from 'axios';
 import * as AuthService from 'services/auth-service';
 
 // App won't redirected to Login page on 401 Error if it's calling these APIs
 const authWhiteListAPIs = ['/auth/login'];
 
-const requestAuthInterceptor = (req: AxiosRequestConfig): AxiosRequestConfig => {
+const requestAuthInterceptor = (req: AxiosRequestConfig): InternalAxiosRequestConfig => {
   const token = AuthService.getToken();
   if (token) {
     return {
@@ -12,10 +12,10 @@ const requestAuthInterceptor = (req: AxiosRequestConfig): AxiosRequestConfig => 
       headers: {
         ...req.headers,
         Authorization: `Bearer ${token}`,
-      },
+      } as AxiosRequestHeaders,
     };
   }
-  return req;
+  return req as InternalAxiosRequestConfig;
 };
 
 const responseRejectInterceptor = (res: any): AxiosResponse => {

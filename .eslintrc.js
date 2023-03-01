@@ -1,5 +1,5 @@
 module.exports = {
-  extends: ['eslint:recommended', 'react-app', 'mantine', 'plugin:jest/recommended'],
+  extends: ['eslint:recommended', 'react-app', 'plugin:jest/recommended'],
   plugins: ['testing-library', 'jest'],
   overrides: [
     {
@@ -14,6 +14,6 @@ module.exports = {
     'react/react-in-jsx-scope': 'off',
     'max-len': ['error', 120],
     'no-unused-vars': 'warn',
-    "@typescript-eslint/no-unused-vars": ["warn"],
+    '@typescript-eslint/no-unused-vars': ['warn'],
   },
 };
